@@ -32,5 +32,6 @@ def message(request):
 def room(request, your_name, room_name):
   return render(request, 'clients/room.html', {
     'room_name_json': mark_safe(json.dumps(room_name)),
-    'your_name': mark_safe(json.dumps(your_name))
+    'your_name': mark_safe(json.dumps(your_name)),
+    'my_name': your_name
   })
