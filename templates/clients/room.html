@@ -12,12 +12,16 @@
         right: 0;
         left: 0;
       }
+      #chat-log {
+        margin-top: 40px;
+      }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
     <div class="container mt-3">
       <h1>Chats group</h1>
-      <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+      <div id="chat-log"></div>
     </div>
     <div class="chat-bar p-5">
       <div class="container">
@@ -42,7 +46,9 @@
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
-        document.querySelector('#chat-log').value += (message + '\n');
+        // document.querySelector('#chat-log').value += (message + '\n');
+        var divMessage = $('<div class="bg-success d-inline-block text-white pt-2 pb-2 pl-3 pr-5 mb-3" style="border-radius: 5px"></div><br />').text(message);
+        $('#chat-log').append(divMessage);
     };
 
     chatSocket.onclose = function(e) {
