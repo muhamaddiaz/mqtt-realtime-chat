@@ -32,14 +32,11 @@
         <div>Masukkan data</div>
       </div>
       <div class="card-body text-center">
-        <form action="" method="POST">
+        <form action="/clients/submitchat/" method="POST">
+          {% csrf_token %}
           <div class="form-group">
             <label for="" class="sr-only">Masukkan nama anda: </label>
             <input type="text" name="from" class="form-control" placeholder="from" required>
-          </div>
-          <div class="form-group">
-            <label for="" class="sr-only">Masukkan nama penerima: </label>
-            <input type="text" name="to" class="form-control" placeholder="to" required>
           </div>
           <button class="btn btn-primary">Lanjutkan</button>
         </form>

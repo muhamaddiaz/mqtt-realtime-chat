@@ -17,16 +17,20 @@
 </head>
 <body>
   <div class="container mt-3">
-    <h1>Chats with </h1>
+    <h1>Chats group {{ from_name }}</h1>
   </div>
   <div class="chat-bar p-5">
     <div class="container">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Ketik sesuatu">
-        <div class="input-group-append">
-          <button class="btn btn-outline-success" type="button">Kirim</button>
+      <form action="/clients/message/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="last" value={{from_name}} />
+        <div class="input-group">
+          <input type="text" name="msg" class="form-control" placeholder="Ketik sesuatu">
+          <div class="input-group-append">
+            <button class="btn btn-outline-success" type="submit">Kirim</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </body>
