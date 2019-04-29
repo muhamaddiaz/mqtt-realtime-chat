@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,6 +18,7 @@
 <body>
   <div class="container mt-3">
     <h1>Chats group {{ from_name }}</h1>
+    <p>{{message}}</p>
   </div>
   <div class="chat-bar p-5">
     <div class="container">
@@ -25,7 +26,7 @@
         {% csrf_token %}
         <input type="hidden" name="last" value={{from_name}} />
         <div class="input-group">
-          <input type="text" name="msg" class="form-control" placeholder="Ketik sesuatu">
+          <input type="text" name="msg" class="form-control" placeholder="Ketik sesuatu" required>
           <div class="input-group-append">
             <button class="btn btn-outline-success" type="submit">Kirim</button>
           </div>
@@ -33,5 +34,40 @@
       </form>
     </div>
   </div>
+</body>
+</html> {% endcomment %}
+
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+      <p class="mt-5">Masukkan nama room chat</p>
+      <div class="input-group">
+        <input id="room-name-input" class="form-control" type="text" size="100"/><br/>
+      </div>
+      <br />
+      <input id="room-name-submit" type="button" class="btn btn-outline-success" value="Enter"/>
+    </div>
+    
+
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            window.location.pathname = 'clients/chat/' + roomName + '/';
+        };
+    </script>
 </body>
 </html>

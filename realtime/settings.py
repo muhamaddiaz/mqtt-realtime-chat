@@ -26,19 +26,21 @@ SECRET_KEY = 'yiit@&gr+ekp6p-fkof_e3j9#0p%@&z9rffj6*c@86t-d-iy+x'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.0.103', '127.0.0.1'
+    'localhost', '192.168.0.103'
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'clients',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +73,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'realtime.wsgi.application'
 
+ASGI_APPLICATION = "realtime.routing.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -101,6 +112,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -114,7 +135,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
