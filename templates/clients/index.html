@@ -29,14 +29,14 @@
     <h1 class="m-5">MQTT Chat App</h1>
     <div class="card">
       <div class="card-header">
-        <div>Masukkan data</div>
+        <div>Masukkan nama</div>
       </div>
       <div class="card-body text-center">
         <form action="/clients/submitchat/" method="POST">
           {% csrf_token %}
           <div class="form-group">
             <label for="" class="sr-only">Masukkan nama anda: </label>
-            <input type="text" name="from" class="form-control" placeholder="from" required>
+            <input type="text" name="from" class="form-control" placeholder="Nama" required>
           </div>
           <button class="btn btn-primary">Lanjutkan</button>
         </form>

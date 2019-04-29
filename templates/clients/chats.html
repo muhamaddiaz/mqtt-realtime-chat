@@ -50,6 +50,7 @@
       <p class="mt-5">Masukkan nama room chat</p>
       <div class="input-group">
         <input id="room-name-input" class="form-control" type="text" size="100"/><br/>
+        <input type="hidden" value="{{your_name}}" id="route-name" />
       </div>
       <br />
       <input id="room-name-submit" type="button" class="btn btn-outline-success" value="Enter"/>
@@ -66,7 +67,9 @@
 
         document.querySelector('#room-name-submit').onclick = function(e) {
             var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = 'clients/chat/' + roomName + '/';
+            var routeName = {{your_name}};
+            
+            window.location.pathname = 'clients/' + routeName + '/chat/' + roomName + '/';
         };
     </script>
 </body>

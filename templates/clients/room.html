@@ -13,6 +13,7 @@
         left: 0;
       }
       #chat-log {
+        width: 100%;
         margin-top: 40px;
       }
     </style>
@@ -38,7 +39,7 @@
 </body>
 <script>
     var roomName = {{ room_name_json }};
-
+    var userName = {{ your_name }};
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
@@ -47,7 +48,15 @@
         var data = JSON.parse(e.data);
         var message = data['message'];
         // document.querySelector('#chat-log').value += (message + '\n');
-        var divMessage = $('<div class="bg-success d-inline-block text-white pt-2 pb-2 pl-3 pr-5 mb-3" style="border-radius: 5px"></div><br />').text(message);
+        console.log(e)
+        if(userName === message[1]) {
+          var divMessage = $('<div class="bg-primary d-inline-block text-white pt-2 pb-2 pl-3 pr-5 mb-3" style="border-radius: 5px;"></div><br />')
+                            .text(message[0]);
+        } else {
+          var divMessage = $('<div class="bg-success d-inline-block text-white pt-2 pb-2 pl-3 pr-5 mb-3" style="border-radius: 5px;margin-left: 90%"></div><br />')
+                            .text(message[0]);
+        }
+        
         $('#chat-log').append(divMessage);
     };
 
@@ -65,10 +74,10 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
+        var author = {{your_name}}
         chatSocket.send(JSON.stringify({
-            'message': message
+            'message': [message, userName],
         }));
-
         messageInputDom.value = '';
     };
 </script>
