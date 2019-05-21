@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-import paho.mqtt.publish as publish
-from . import mqtt
 from django.utils.safestring import mark_safe
 import json
 

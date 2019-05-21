@@ -53,10 +53,10 @@
         console.log(e)
         if(userName === message[1]) {
           var divMessage = 
-            $(`<div style="text-align:left"><div class="bg-primary d-inline-block text-white pt-2 pb-2 pl-3 pr-5 mt-3" style="border-radius: 5px;">${message[0]}</div><div><i style="font-size: .8rem; color: grey; margin-left: 3px">${message[1]}</i></div></div><br />`)
+            $(`<div style="text-align:left"><div class="bg-primary d-inline-block text-white pt-2 pb-2 pl-3 pr-5 mt-3" style="border-radius: 5px;">${message[0]}</div><div><i style="font-size: .8rem; color: grey; margin-left: 3px">${message[1]} . ${message[2]}</i></div></div><br />`)
         } else {
           var divMessage = 
-            $(`<div style="text-align:right"><div class="bg-success d-inline-block text-white pt-2 pb-2 pl-5 pr-3 mt-3" style="border-radius: 5px;">${message[0]}</div><div><i style="font-size: .8rem; color: grey; margin-left: 3px">${message[1]}</i></div></div><br />`)
+            $(`<div style="text-align:right"><div class="bg-success d-inline-block text-white pt-2 pb-2 pl-5 pr-3 mt-3" style="border-radius: 5px;">${message[0]}</div><div><i style="font-size: .8rem; color: grey; margin-left: 3px">${message[1]} . ${message[2]}</i></div></div><br />`)
         }
         
         $('#chat-log').append(divMessage);
@@ -76,9 +76,11 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
-        var author = {{your_name}}
+        var date = new Date();
+        var time = date.toUTCString(); // menambahkan tanggal pengiriman pesan masing masing client
+        var author = {{your_name}};
         chatSocket.send(JSON.stringify({
-            'message': [message, userName],
+            'message': [message, userName, time],
         }));
         messageInputDom.value = '';
     };
